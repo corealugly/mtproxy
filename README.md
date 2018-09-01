@@ -6,6 +6,7 @@ The Telegram Messenger MTProto proxy is a zero-configuration container that auto
 To start the proxy all you need to do is
 `docker run -d -p443:443 --name=mtproxy --restart=always -v ./config:/data alexdoesh/mtproxy:latest`
 
+
 The container's log output (`docker logs mtproxy`) will contain the links to paste into the Telegram app:
 
 ```
@@ -29,6 +30,8 @@ Once your MTProxy server is up and running go to [@MTProxybot](https://t.me/mtpr
 ## Custom configuration
 If you need to specify a custom secret (say, if you are deploying multiple proxies with DNS load-balancing), you may pass the SECRET environment variable as 16 bytes in lower-case hexidecimals.:
 `docker run -d -p443:443 -v ./config:/data -e SECRET=00baadf00d15abad1deaa51sbaadcafe alexdoesh/mtproxy:latest`
+
+Generate `SECRET` for mtproto: `openssl rand -hex 16`
 
 The proxy may be configured to accept up to 16 different secrets. You may specify them explicitly as comma-separated hex strings in the SECRET environment variable, or you may let the container generate the secrets automatically using the SECRET_COUNT variable to limit the number of generated secrets.
 

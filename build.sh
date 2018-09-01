@@ -9,9 +9,10 @@ TO="example.ru/project"
 VERSION="${1}"
 if [[ -z ${1} ]]; then echo "ERROR: not exist 1 arg"; cat ${fileVersion}; exit 1; fi
 
-#docker build  --no-cache -t ${FROM}/${COMPONENT}:${VERSION} .
-docker build -t ${FROM}/${COMPONENT}:${VERSION} .
+#docker build  --no-cache -t ${FROM}/${COMPONENT}:${VERSION} -t ${FROM}/${COMPONENT}:latest .
+docker build -t ${FROM}/${COMPONENT}:${VERSION} -t ${FROM}/${COMPONENT}:latest .
 
+#PUSH INTO EXTENRNAL REPO
 #docker tag ${FROM}/${COMPONENT}:${VERSION} ${TO}/${COMPONENT}:${VERSION}
 #docker tag ${FROM}/${COMPONENT}:${VERSION} ${TO}/${COMPONENT}:latest
 #docker push     ${TO}/${COMPONENT}:${VERSION}

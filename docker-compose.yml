@@ -1,23 +1,26 @@
-version: '3'
+version: '3.0'
 
 services:
-
   mtproxy:
-    image: alexdoesh/mtproxy
+    image: local/mtproxy:latest
+    hostname: mtproxy
     container_name: mtproxy
     restart: always
     # command: --add --your --commands
-    # environment:
-    #   - OVERRIDE=SOME
-    #   - VARIABLES=HERE
+    environment:
+      SECRET: 'secret1,secret2'
     volumes:
       - ./config:/data
     ports:
-      - "2398:2398"
-      - "443:443"
+      - '2398:2398'
+      - '444:443'
+    restart: always
+    logging:
+      driver: syslog
+      options:
+        tag: mtproxy
     networks:
       - tg_stack
 
 networks:
   tg_stack:
-
